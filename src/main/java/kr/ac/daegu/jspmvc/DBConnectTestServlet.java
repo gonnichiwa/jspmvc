@@ -20,7 +20,7 @@ public class DBConnectTestServlet extends HttpServlet {
 
         try {
             boolean isConnected = TestDAO.getConnection();
-            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("db 연결 성공.");
         } catch (Exception e) {
