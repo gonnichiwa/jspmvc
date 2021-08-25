@@ -36,6 +36,9 @@
         <td>${row.commentCount}</td>
     </tr>
     </c:forEach>
+    <tr>
+        <td colspan="7">[글 추가하기]</td>
+    </tr>
 </table>
 
 </body>
