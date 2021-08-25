@@ -1,5 +1,8 @@
 package kr.ac.daegu.jspmvc.controller;
 
+import kr.ac.daegu.jspmvc.biz.BoardCmd;
+import kr.ac.daegu.jspmvc.biz.BoardListCmd;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +20,8 @@ public class BoardFrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
@@ -27,9 +31,13 @@ public class BoardFrontController extends HttpServlet {
         System.out.println("contextPath = " + contextPath);
         System.out.println("cmdURI = " + cmdURI);
 
+        BoardCmd cmd = null;
         String viewPage = null;
-        // 글 목록 조회 처리
+
+        // 글 목록 조회 처리(/jspmvc/boardList.bbs)
         if(cmdURI.equals("/boardList.bbs")){
+            cmd = new BoardListCmd();
+            cmd.execute(request, response);
             viewPage = "view/boardList.jsp";
         }
 
