@@ -29,7 +29,7 @@
     </tr>
     <tr>
         <!-- 취소 버튼을 누르면 boardList.bbs로 가도록 처리해 보시오. -->
-        <td colspan="2">[글쓰기][취소]</td>
+        <td colspan="2">[글쓰기]<a href="../boardList.bbs">[취소]</a></td>
     </tr>
 </table>
 </body>
