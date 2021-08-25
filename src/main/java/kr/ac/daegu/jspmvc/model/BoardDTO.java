@@ -6,7 +6,7 @@ import java.util.Date;
 
 // db에서 Board테이블의 컬럼과 row를 정의.
 public class BoardDTO {
-    private int id;                      // 글 id
+    private int id;                      // 글 id(글번호)
     private String author;               // 작성자 이름
     private String subject;              // 글 제목
     private String content;              // 글 컨텐츠

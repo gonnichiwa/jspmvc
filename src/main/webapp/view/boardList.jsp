@@ -14,9 +14,29 @@
 </head>
 <body>
 <!-- BoardListCmd.java에서 가져온 데이터를 어떻게 jsp파일에서 html 형태로 보여줄 것인가? -->
-<c:forEach var="j" begin="1" end="3">
-Item <c:out value="${j}"/><p>
-</c:forEach>
+<table>
+    <tr>
+        <td>글번호</td>
+        <td>작성자</td>
+        <td>제목</td>
+        <td>작성일</td>
+        <td>작성시각</td>
+        <td>조회수</td>
+        <td>댓글갯수</td>
+    </tr>
+    <!-- jstl if 태그를 써서 글번호가 짝수인 글의 목록만 보여주시오. -->
+    <c:forEach items="${boardRowList}" var="row">
+    <tr>
+        <td>${row.id}</td>
+        <td>${row.author}</td>
+        <td>${row.subject}</td>
+        <td>${row.writeDate}</td>
+        <td>${row.writeTime}</td>
+        <td>${row.readCount}</td>
+        <td>${row.commentCount}</td>
+    </tr>
+    </c:forEach>
+</table>
 
 </body>
 </html>
