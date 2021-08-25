@@ -29,7 +29,7 @@
     <tr>
         <td>${row.id}</td>
         <td>${row.author}</td>
-        <td>${row.subject}</td>
+        <td>${row.subject}</td><!-- 제목을 누르면 글 읽기에 해당하는 controller 요청-->
         <td>${row.writeDate}</td>
         <td>${row.writeTime}</td>
         <td>${row.readCount}</td>

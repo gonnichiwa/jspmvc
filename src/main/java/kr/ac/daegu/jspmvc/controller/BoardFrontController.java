@@ -50,6 +50,9 @@ public class BoardFrontController extends HttpServlet {
             viewPage = "boardList.bbs";
         }
 
+        // mission : 글 읽기
+
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);
