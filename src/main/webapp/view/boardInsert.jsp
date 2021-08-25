@@ -32,7 +32,8 @@
             <!-- 취소 버튼을 누르면 boardList.bbs로 가도록 처리해 보시오. -->
             <td colspan="2">
                 <input type="submit" value="[글쓰기]"/>
-                <a href="../boardList.bbs">[취소]</a></td>
+                <a href="../boardList.bbs">[취소]</a>
+            </td>
         </tr>
     </table>
 </form>

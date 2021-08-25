@@ -34,6 +34,5 @@ public class BoardListCmd implements BoardCmd {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
