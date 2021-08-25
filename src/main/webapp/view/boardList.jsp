@@ -37,7 +37,7 @@
     </tr>
     </c:forEach>
     <tr>
-        <td colspan="7"><a href="#">[글 추가하기]</a></td>
+        <td colspan="7"><a href="boardInsert.bbs">[글 추가하기]</a></td>
     </tr>
 </table>
 
