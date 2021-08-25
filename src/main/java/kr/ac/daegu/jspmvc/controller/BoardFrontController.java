@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("*.bbs")
+@WebServlet("*.bbs") // jspmvc/*.bbs 으로 들어오는 모든 요청을 처리하는 서블릿
 public class BoardFrontController extends HttpServlet {
 
     @Override
@@ -40,6 +40,7 @@ public class BoardFrontController extends HttpServlet {
             cmd.execute(request, response);
             viewPage = "view/boardList.jsp";
         }
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);

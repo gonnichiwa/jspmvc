@@ -24,7 +24,13 @@ public class BoardListCmd implements BoardCmd {
         ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 
         try {
-            list = dao.getBoardList();
+            list = dao.getBoardList(); // 여기까지는 성공
+
+            /*
+            * 가져온 db 데이터 리스트를 어떻게 jsp로 보여줄것인가?
+            * */
+            request.setAttribute("boardRowList", list);
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
