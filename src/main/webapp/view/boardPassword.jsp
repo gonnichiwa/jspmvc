@@ -19,12 +19,10 @@
     </tr>
     <tr>
         <td colspan="2">
-            [확인][취소]
+            <a href="../boardPwdCheck.bbs">[확인]</a>[취소]
         </td>
     </tr>
 </table>
-
-수정할 비밀번호 입력 화면입니다.
 
 </body>
 </html>
