@@ -57,7 +57,7 @@ public class BoardFrontController extends HttpServlet {
         * 수정하기 관련
         * */
         // 글의 패스워드 체크
-        if(cmdURI.equals("/boardPwdCheck.bbs")){
+        if(cmdURI.equals("/boardPwdCheckToUpdate.bbs")){
             cmd = new BoardPwdCheckCmd();
             boolean isPasswordCorrect = cmd.execute(request, response);
             if(isPasswordCorrect){
@@ -74,6 +74,10 @@ public class BoardFrontController extends HttpServlet {
             // 바로 글 목록 화면으로
             viewPage = "boardList.bbs";
         }
+
+        /*
+        * 삭제하기 관련
+        * */
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);

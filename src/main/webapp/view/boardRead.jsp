@@ -50,8 +50,8 @@
     <tr>
         <td colspan="2">
             <a href="boardList.bbs">[글 목록 보기]</a>
-            <a href="./view/boardPassword.jsp?id=${boardData.id}">[수정하기]</a>
-            [삭제하기]
+            <a href="./view/boardPasswordToUpdate.jsp?id=${boardData.id}">[수정하기]</a>
+            [삭제하기] <!-- ORDER : 패스워드 확인 하고 boardPasswordToDelete.jsp -->
         </td>
     </tr>
 </table>

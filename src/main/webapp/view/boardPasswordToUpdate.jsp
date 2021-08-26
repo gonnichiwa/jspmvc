@@ -11,7 +11,7 @@
     <title>수정할 비밀번호 입력</title>
 </head>
 <body>
-<form action="../boardPwdCheck.bbs" method="post">
+<form action="../boardPwdCheckToUpdate.bbs" method="post">
     <input type="hidden" name="boardDataId" value="<%= request.getParameter("id")%>">
     <table>
         <tr>
