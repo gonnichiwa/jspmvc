@@ -106,4 +106,38 @@ public class BoardDAO {
 
     }
 
+    public BoardDTO getBoardData(int id) throws ClassNotFoundException, SQLException {
+        // db에 접속해서
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        // 쿼리 실행시키고
+        pstmt = conn.prepareStatement("select * from Board where id = ?");
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        // 반환 데이터를 리턴.
+        BoardDTO data = new BoardDTO();
+        if(rs.next()){
+//            int id = rs.getInt("id");
+            String author = rs.getString("author");
+            String subject = rs.getString("subject");
+            String content = rs.getString("content");
+            Date writeDate = rs.getDate("writeDate");
+            Time writeTime = rs.getTime("writeTime");
+            int readCount = rs.getInt("readCount");
+            int commentCount = rs.getInt("commentCount");
+
+            data.setId(id);
+            data.setAuthor(author);
+            data.setSubject(subject);
+            data.setContent(content);
+            data.setWriteDate(writeDate);
+            data.setWriteTime(writeTime);
+            data.setReadCount(readCount);
+            data.setCommentCount(commentCount);
+
+        }
+        return data;
+    }
 }
