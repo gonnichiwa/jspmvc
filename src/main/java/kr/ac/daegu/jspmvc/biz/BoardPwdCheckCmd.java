@@ -8,6 +8,7 @@ import java.io.IOException;
 public class BoardPwdCheckCmd implements BoardCmd {
     @Override
     public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         return true;
     }
 }
