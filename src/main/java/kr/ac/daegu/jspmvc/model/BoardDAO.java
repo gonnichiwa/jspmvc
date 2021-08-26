@@ -140,4 +140,17 @@ public class BoardDAO {
         }
         return data;
     }
+
+    public void boardRowPlusReadCount(int rowId, int howMuch) throws ClassNotFoundException, SQLException {
+        // db에 접속해서
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+
+        // 해당 아이디의 row에서 readCount를 +1 해주는 쿼리 실행
+        pstmt = conn.prepareStatement("update Board set readCount=readCount + ? where id = ?");
+        pstmt.setInt(1, howMuch);
+        pstmt.setInt(2, rowId);
+        pstmt.executeUpdate();
+    }
 }
