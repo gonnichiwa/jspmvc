@@ -47,6 +47,13 @@
         <td>댓글수</td>
         <td>${boardData.commentCount}</td>
     </tr>
+    <tr>
+        <td colspan="2">
+            <a href="boardList.bbs">[글 목록 보기]</a>
+            [수정하기]
+            [삭제하기]
+        </td>
+    </tr>
 </table>
 <!-- [글 목록 보기][수정하기][삭제하기] 글 목록보기 클릭하면 boardList.bbs로 foward -->
 글 읽기 화면입니다.
