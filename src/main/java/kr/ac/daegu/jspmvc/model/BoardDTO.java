@@ -14,6 +14,15 @@ public class BoardDTO {
     private Time writeTime;              // 작성 시간
     private int readCount;               // 조회수
     private int commentCount;            // 댓글 갯수
+    private String password;             // 수정 삭제를 위한 패스워드
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getId() {
         return id;
