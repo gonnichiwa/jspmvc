@@ -56,6 +56,7 @@ public class BoardFrontController extends HttpServlet {
             cmd.execute(request, response);
             viewPage = "view/boardRead.jsp";
         }
+        // 수정
 
 
 

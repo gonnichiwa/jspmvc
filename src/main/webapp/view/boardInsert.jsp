@@ -29,6 +29,10 @@
             <td><input type="text" name="content" id="content"/></td>
         </tr>
         <tr>
+            <td><label for="password">수정삭제비밀번호</label></td>
+            <td><input type="text" name="password" id="password"/></td>
+        </tr>
+        <tr>
             <!-- 취소 버튼을 누르면 boardList.bbs로 가도록 처리해 보시오. -->
             <td colspan="2">
                 <input type="submit" value="[글쓰기]"/>
