@@ -69,8 +69,8 @@ public class BoardFrontController extends HttpServlet {
         // 글 수정 처리
         if(cmdURI.equals("/boardUpdate.bbs")){
             // 글 수정처리 bizlogic
-//            cmd = new BoardUpdateCmd();
-//            cmd.execute(request, response);
+            cmd = new BoardUpdateCmd();
+            cmd.execute(request, response);
             // 바로 글 목록 화면으로
             viewPage = "boardList.bbs";
         }
