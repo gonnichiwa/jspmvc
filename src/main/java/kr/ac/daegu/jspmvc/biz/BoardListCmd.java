@@ -27,8 +27,17 @@ public class BoardListCmd implements BoardCmd {
         // dao 기능 호출해서 가져온 db 데이터를 저장하는 컬렉션
         ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 
+        // pageNum의 요청을 받는다.
+        String page = request.getParameter("page");
+        int pageNum;
+        if(page == null){
+            pageNum = 1;
+        } else {
+            pageNum = Integer.parseInt(request.getParameter("page"));
+        }
+
         try {
-            list = dao.getBoardList(1, PAGE_PER_ROW);
+            list = dao.getBoardList(pageNum, PAGE_PER_ROW);
 
             /*
             * 가져온 db 데이터 리스트를 어떻게 jsp로 보여줄것인가?
