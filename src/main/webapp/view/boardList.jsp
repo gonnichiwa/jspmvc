@@ -18,8 +18,10 @@
     <tr>
         <td colspan="7">
             <label for="pagePerRow">페이지당 보여줄 글의 갯수 :</label>
-            <input type="text" name="pagePerRow" id="pagePerRow" value="3"/>
-            <input type="submit" value="확인"/>
+            <form action="boardList.bbs?page=1" method="post">
+                <input type="text" name="pagePerRow" id="pagePerRow" value="${pagePerRow}"/>
+                <input type="submit" value="확인"/>
+            </form>
         </td>
     </tr>
     <tr>
@@ -50,12 +52,11 @@
     <tr>
         <td colspan="7">
             <c:forEach var="i" begin="1" end="${totalPageCount}">
-                <a href="boardList.bbs?page=${i}">[<c:out value="${i}"/>]<a/>
+                <a href="boardList.bbs?page=${i}&pagePerRow=${pagePerRow}">[<c:out value="${i}"/>]<a/>
             </c:forEach>
         </td>
     </tr>
 </table>
-전체 글row의 갯수 : ${totalRowCount}
 나와야하는 페이지 선택 갯수 : ${totalPageCount}
 </body>
 </html>
