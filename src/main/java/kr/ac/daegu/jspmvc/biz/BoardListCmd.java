@@ -15,6 +15,10 @@ import java.util.ArrayList;
 * view로 보낼 데이터 셋의 정의.
 * */
 public class BoardListCmd implements BoardCmd {
+
+    // 페이지당 몇개의 글목록을 보여줄것인지?
+    public static final int PAGE_PER_ROW = 3;
+
     @Override
     public boolean execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,7 +28,7 @@ public class BoardListCmd implements BoardCmd {
         ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 
         try {
-            list = dao.getBoardList(); // 여기까지는 성공
+            list = dao.getBoardList(1, PAGE_PER_ROW);
 
             /*
             * 가져온 db 데이터 리스트를 어떻게 jsp로 보여줄것인가?

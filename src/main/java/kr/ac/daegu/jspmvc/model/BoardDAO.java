@@ -19,15 +19,27 @@ public class BoardDAO {
         return true;
     }
 
-    public ArrayList<BoardDTO> getBoardList() throws ClassNotFoundException, SQLException {
+    public ArrayList<BoardDTO> getBoardList(int pageNum, int pagePerRow) throws ClassNotFoundException, SQLException {
         // Connection, PreparedStatement, ResultSet은 interface 객체이다.
         Class.forName("org.mariadb.jdbc.Driver");
         Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+        // 페이징 처리에 따라 rowNum의 시작과 끝값을 변수처리
+        int startRowNum;
+        int endRowNum = pageNum*pagePerRow;
+        if(pageNum == 1){
+            startRowNum = pageNum;
+        } else {
+            startRowNum = (pagePerRow*(pageNum-1))+1;
+        }
+
         // 쿼리 준비 & db 쿼리
-        pstmt = conn.prepareStatement("select * from Board");
+        pstmt = conn.prepareStatement("select * \n" +
+                "from \n" +
+                "(select board.*, ROW_NUMBER() OVER() as rowNum from board order by id asc) tb\n" +
+                "where tb.rowNum between "+startRowNum+" and "+endRowNum);
         rs = pstmt.executeQuery();
 
         // 글 목록을 반환할 ArrayList
