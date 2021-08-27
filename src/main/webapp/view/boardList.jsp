@@ -41,6 +41,6 @@
         <td colspan="7"><a href="/jspmvc/view/boardInsert.jsp">[글 추가하기]</a></td>
     </tr>
 </table>
-
+전체 글row의 갯수 : ${totalRowCount}
 </body>
 </html>

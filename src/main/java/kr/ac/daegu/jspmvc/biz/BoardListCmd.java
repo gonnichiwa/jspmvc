@@ -38,11 +38,15 @@ public class BoardListCmd implements BoardCmd {
 
         try {
             list = dao.getBoardList(pageNum, PAGE_PER_ROW);
+            // 페이지 번호가 몇번까지 나올 수 있는가? (board테이블 전체 글의 갯수, row갯수)
+            int totalRowCount = dao.getBoardTotalRowCount();
+
 
             /*
             * 가져온 db 데이터 리스트를 어떻게 jsp로 보여줄것인가?
             * */
             request.setAttribute("boardRowList", list);
+            request.setAttribute("totalRowCount", totalRowCount);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
