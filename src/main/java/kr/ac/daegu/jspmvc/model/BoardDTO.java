@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 // db에서 Board테이블의 컬럼과 row를 정의.
+// DataTransferObject : db에서 가져오는 테이블 row 데이터의 묶음.
+// ValueObject        : db에서 가져오는 테이블 row 데이터의 묶음. setter가 없다.
 public class BoardDTO {
     private int id;                      // 글 id(글번호)
     private String author;               // 작성자 이름

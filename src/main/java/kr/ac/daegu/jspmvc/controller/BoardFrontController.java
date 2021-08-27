@@ -78,6 +78,20 @@ public class BoardFrontController extends HttpServlet {
         /*
         * 삭제하기 관련
         * */
+        // 글의 패스워드 체크
+        if(cmdURI.equals("/boardPwdCheckToDelete.bbs")){
+            cmd = new BoardPwdCheckCmd();
+            boolean isPasswordCorrect = cmd.execute(request, response);
+            if(isPasswordCorrect){
+                // 삭제 처리 하고
+                cmd = new BoardDeleteCmd();
+                cmd.execute(request, response);
+                // boardList.bbs호출
+                viewPage = "boardList.bbs";
+            } else {
+                viewPage = "view/boardPwdCheckFalse.jsp";
+            }
+        }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);
