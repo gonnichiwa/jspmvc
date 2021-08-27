@@ -42,5 +42,6 @@
     </tr>
 </table>
 전체 글row의 갯수 : ${totalRowCount}
+나와야하는 페이지 선택 갯수 : ${totalPageCount}
 </body>
 </html>
