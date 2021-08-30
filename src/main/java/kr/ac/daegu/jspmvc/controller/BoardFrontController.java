@@ -93,6 +93,19 @@ public class BoardFrontController extends HttpServlet {
             }
         }
 
+
+        /*
+        * 댓글 관련
+        * */
+        if(cmdURI.equals("/commentInsert.bbs")) {
+            cmd = new BoardCommentInsertCmd();
+            cmd.execute(request, response);
+            // 댓글 입력 후 어떻게 view를 처리해 줄까?
+            // 댓글 단 게시글의 번호 그대로 boardRead.bbs 해주자.
+            String boardId = request.getParameter("boardId");
+            viewPage = "boardRead.bbs?id="+boardId;
+        }
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);
 
