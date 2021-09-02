@@ -69,5 +69,18 @@
 </table>
 <!-- [글 목록 보기][수정하기][삭제하기] 글 목록보기 클릭하면 boardList.bbs로 foward -->
 
+<!-- 댓글 보여줌 start -->
+<table>
+    <c:forEach items="${comments}" var="cmt">
+        <tr>
+            <td>${cmt.author}</td>
+            <td>${cmt.content}</td>
+            <td>${cmt.writeDate}</td>
+            <td>${cmt.writeTime}</td>
+        </tr>
+    </c:forEach>
+</table>
+<!-- 댓글 보여줌 end -->
+
 </body>
 </html>

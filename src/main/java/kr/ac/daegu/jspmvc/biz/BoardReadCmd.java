@@ -41,6 +41,7 @@ public class BoardReadCmd implements BoardCmd {
 
         // boardRead.jsp에 보여줄 데이터를 셋
         request.setAttribute("boardData", boardData);
+        request.setAttribute("comments", commentList);
 
         return true;
     }

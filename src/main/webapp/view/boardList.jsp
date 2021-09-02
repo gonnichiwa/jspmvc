@@ -38,15 +38,15 @@
         <td>댓글갯수</td>
     </tr>
     <!-- jstl if 태그를 써서 글번호가 짝수인 글의 목록만 보여주시오. -->
-    <c:forEach items="${boardRowList}" var="row">
+    <c:forEach items="${boardRowList}" var="cmt">
     <tr>
-        <td>${row.id}</td>
-        <td>${row.author}</td>
-        <td><a href="boardRead.bbs?id=${row.id}">${row.subject}</a></td><!-- 제목을 누르면 글 읽기에 해당하는 controller 요청-->
-        <td>${row.writeDate}</td>
-        <td>${row.writeTime}</td>
-        <td>${row.readCount}</td>
-        <td>${row.commentCount}</td>
+        <td>${cmt.id}</td>
+        <td>${cmt.author}</td>
+        <td><a href="boardRead.bbs?id=${cmt.id}">${cmt.subject}</a></td><!-- 제목을 누르면 글 읽기에 해당하는 controller 요청-->
+        <td>${cmt.writeDate}</td>
+        <td>${cmt.writeTime}</td>
+        <td>${cmt.readCount}</td>
+        <td>${cmt.commentCount}</td>
     </tr>
     </c:forEach>
     <tr>
