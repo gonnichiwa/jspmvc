@@ -3,6 +3,7 @@ package kr.ac.daegu.jspmvc.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 // DatabaseAccessObject : 이 객체가 db에 접속해서 쿼리를 날리고 결과를 리턴해주는 책임
 public class BoardDAO {
@@ -253,5 +254,32 @@ public class BoardDAO {
 
         // 예외 발생
         throw new SQLException("댓글 컨텐츠를 새로 입력하기 위한 아이디값 받아오기를 실패하였습니다.");
+    }
+
+    public List<CommentDTO> getCommentList(int boardContentId) throws ClassNotFoundException, SQLException {
+        List<CommentDTO> list = new ArrayList<CommentDTO>();
+        // Connection, PreparedStatement, ResultSet은 interface 객체이다.
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        pstmt = conn.prepareStatement("select cid as 'commentId', id, author, content, writeDate, writeTime from comment where id = ?");
+        pstmt.setInt(1, boardContentId);
+        rs = pstmt.executeQuery();
+
+        while(rs.next()){
+            CommentDTO dto = new CommentDTO();
+            dto.setCid(rs.getInt("commentId"));
+            dto.setId(rs.getInt("id"));
+            dto.setAuthor(rs.getString("author"));
+            dto.setContent(rs.getString("content"));
+            dto.setWriteDate(rs.getDate("writeDate"));
+            dto.setWriteTime(rs.getTime("writeTime"));
+
+            list.add(dto);
+        }
+
+        return list;
     }
 }
