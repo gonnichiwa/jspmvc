@@ -282,4 +282,15 @@ public class BoardDAO {
 
         return list;
     }
+
+    public void updateCommentCount(int boardId) throws ClassNotFoundException, SQLException {
+        // Connection, PreparedStatement, ResultSet은 interface 객체이다.
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement("update board set commentCount=commentCount+1 where id = ?");
+        pstmt.setInt(1, boardId);
+        pstmt.executeUpdate();
+    }
 }

@@ -27,6 +27,7 @@ public class BoardCommentInsertCmd implements BoardCmd {
         try {
             newId = dao.getCommentNewId();
             dao.insertCommnet(newId, boardId, commentAuthor, commentContent);
+            dao.updateCommentCount(boardId);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
