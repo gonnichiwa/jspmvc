@@ -17,6 +17,34 @@ public class BoardDTO {
     private int readCount;               // 조회수
     private int commentCount;            // 댓글 갯수
     private String password;             // 수정 삭제를 위한 패스워드
+    
+    private int refId;                   // 원래 글 번호 (답글일 경우) 
+    private int depth;                   // (답글일경우) 제목의 'RE: ' 갯수
+    private int orderNum;                // (답글일경우) 글 목록보기 순서
+
+    public int getRefId() {
+        return refId;
+    }
+
+    public void setRefId(int refId) {
+        this.refId = refId;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
 
     public String getPassword() {
         return password;
