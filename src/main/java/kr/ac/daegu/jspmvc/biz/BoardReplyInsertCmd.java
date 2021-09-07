@@ -46,9 +46,17 @@ public class BoardReplyInsertCmd implements BoardCmd {
             if(minOrderNum == 0) {
                 orderNum = dao.getReplyOrderNum(replyRootId);
                 depth = depth + 1;
+                subject = appendPrefixString("RE: ", depth, subject);
                 dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
             } else {
-
+                /*
+                -- 2-2. 1번(minOrderNum)이 0이 아닐 경우(1) : board테이블의 기존 orderNum들을 +1
+                UPDATE BOARD SET orderNum = orderNum + 1
+                WHERE replyRootId =  (원글의 replyRootId)  AND orderNum >= (1번값)
+                -- 2-2. 1번(minOrderNum)이 0이 아닐 경우(2) : board테이블 insert
+                INSERT INTO BOARD VALUES
+                (번호, (원글의 replyRootId), (1번값), (원글의 DEPTH +1) ,' 제목')
+                */
             }
 
 
@@ -59,6 +67,16 @@ public class BoardReplyInsertCmd implements BoardCmd {
         }
 
         return true;
+    }
+
+    // 아래 메소드의 뜻을 한국어로 번역 해 보시오.
+    private String appendPrefixString(String appendPrefix, int loop, String target) {
+        StringBuilder builder = new StringBuilder();
+        for(int i=1; i<=loop; i++){
+            builder.append(appendPrefix);
+        }
+        builder.append(target);
+        return builder.toString();
     }
 
 }

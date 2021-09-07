@@ -113,8 +113,8 @@ public class BoardDAO {
         // insert into board values (1, 'testAuthor', 'testSubject', 'testContent', CURDATE(), CURTIME(), 0, 0)
         pstmt = conn.prepareStatement("insert into Board values (?, ?, ?, ?, CURDATE(), CURTIME(), 0, 0, ?, ?, 0, 0)");
         pstmt.setInt(1, newId);
-        pstmt.setString(2, subject);
-        pstmt.setString(3, author);
+        pstmt.setString(2, author);
+        pstmt.setString(3, subject);
         pstmt.setString(4, content);
         pstmt.setString(5, password);
         pstmt.setInt(6, newId);
@@ -223,7 +223,7 @@ public class BoardDAO {
     }
 
 
-    public void insertCommnet(int newCommentId,
+    public void insertComment(int newCommentId,
                               int boardId,
                               String commentAuthor,
                               String commentContent) throws ClassNotFoundException, SQLException {
@@ -315,8 +315,8 @@ public class BoardDAO {
 
         pstmt = conn.prepareStatement("insert into Board values (?, ?, ?, ?, CURDATE(), CURTIME(), 0, 0, ?, ?, ?, ?)");
         pstmt.setInt(1, newId);
-        pstmt.setString(2, subject);
-        pstmt.setString(3, author);
+        pstmt.setString(2, author);
+        pstmt.setString(3, subject);
         pstmt.setString(4, content);
         pstmt.setString(5, password);
         pstmt.setInt(6, replyRootId);
