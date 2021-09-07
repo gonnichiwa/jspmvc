@@ -43,6 +43,15 @@ public class BoardReplyInsertCmd implements BoardCmd {
             int minOrderNum = dao.getMinOrderNum(replyRootId, depth, orderNum);
             System.out.println("minOrderNum==" + minOrderNum);
 
+            if(minOrderNum == 0) {
+                orderNum = dao.getReplyOrderNum(replyRootId);
+                depth = depth + 1;
+                dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
+            } else {
+
+            }
+
+
             // dao 기능 호출해서 enduser가 입력한 데이터와 replyRootId, depth, orderNum insert
 //            dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
         } catch (ClassNotFoundException | SQLException e) {
@@ -51,4 +60,5 @@ public class BoardReplyInsertCmd implements BoardCmd {
 
         return true;
     }
+
 }

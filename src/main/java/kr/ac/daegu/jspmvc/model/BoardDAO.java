@@ -37,10 +37,9 @@ public class BoardDAO {
         }
 
         // 쿼리 준비 & db 쿼리
-        pstmt = conn.prepareStatement("select * \n" +
-                "from \n" +
-                "(select board.*, ROW_NUMBER() OVER() as rowNum from board order by id asc) tb\n" +
-                "where tb.rowNum between "+startRowNum+" and "+endRowNum);
+        pstmt = conn.prepareStatement("select * from " +
+                "(select board.*, ROW_NUMBER() OVER() as rowNum from board order by replyRootId desc, ordernum asc) tb" +
+                " where tb.rowNum between "+startRowNum+" and "+endRowNum);
         rs = pstmt.executeQuery();
 
         // 글 목록을 반환할 ArrayList
@@ -336,10 +335,10 @@ public class BoardDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        pstmt = conn.prepareStatement("SELECT NVL(MIN(ordernum),0) as minOrderNum FROM repltest" +
+        pstmt = conn.prepareStatement("SELECT NVL(MIN(ordernum),0) as minOrderNum FROM board" +
                 "   WHERE  replyRootId = ?" +
                 "   AND orderNum > ?" +
-                "   AND depthnum <= ?");
+                "   AND depth <= ?");
         pstmt.setInt(1, replyRootId);
         pstmt.setInt(2, orderNum);
         pstmt.setInt(3, depth);
@@ -349,5 +348,24 @@ public class BoardDAO {
             return rs.getInt("minOrderNum");
         }
         throw new SQLException("failed to get minOrderNum");
+    }
+
+    public int getReplyOrderNum(int replyRootId) throws ClassNotFoundException, SQLException {
+        int result;
+        // Connection, PreparedStatement, ResultSet은 interface 객체이다.
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        pstmt = conn.prepareStatement("SELECT NVL(MAX(orderNum),0) + 1 as orderNumToInsertBoard FROM board" +
+                " WHERE replyRootId = ?");
+        pstmt.setInt(1, replyRootId);
+        rs = pstmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getInt("orderNumToInsertBoard");
+        }
+        throw new SQLException("failed to get orderNumToInsertBoard");
     }
 }
