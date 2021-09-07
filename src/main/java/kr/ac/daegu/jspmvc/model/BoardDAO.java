@@ -327,13 +327,27 @@ public class BoardDAO {
 
     }
 
-    // replyRootId depth기준 maxOrderNum을 가져옴
-    public int getMaxOrderNum(int replyRootId, int depth) throws ClassNotFoundException, SQLException {
+    // replyRootId depth기준 minOrderNum을 가져옴
+    public int getMinOrderNum(int replyRootId, int depth, int orderNum) throws ClassNotFoundException, SQLException {
+        int result;
         // Connection, PreparedStatement, ResultSet은 interface 객체이다.
         Class.forName("org.mariadb.jdbc.Driver");
         Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-        return 0;
+        pstmt = conn.prepareStatement("SELECT NVL(MIN(ordernum),0) as minOrderNum FROM repltest" +
+                "   WHERE  replyRootId = ?" +
+                "   AND orderNum > ?" +
+                "   AND depthnum <= ?");
+        pstmt.setInt(1, replyRootId);
+        pstmt.setInt(2, orderNum);
+        pstmt.setInt(3, depth);
+        rs = pstmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getInt("minOrderNum");
+        }
+        throw new SQLException("failed to get minOrderNum");
     }
 }

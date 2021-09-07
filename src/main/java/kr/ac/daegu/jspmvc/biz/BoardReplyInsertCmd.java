@@ -18,9 +18,10 @@ public class BoardReplyInsertCmd implements BoardCmd {
         String author = request.getParameter("author");
         String content = request.getParameter("content");
         String password = request.getParameter("password");
-        int replyRootId = Integer.parseInt(request.getParameter("replyRootId"));
-        int depth = Integer.parseInt(request.getParameter("depth")); // 원래 글에대한 depth
-        int orderNum = Integer.parseInt(request.getParameter("orderNum")); // 원래 글에 대한 orderNum
+
+        int replyRootId = Integer.parseInt(request.getParameter("replyRootId")); // 답글들의 root원글
+        int depth = Integer.parseInt(request.getParameter("depth"));             // 답글의 대상 글에대한 depth
+        int orderNum = Integer.parseInt(request.getParameter("orderNum"));       // 답글의 대상 글에 대한 orderNum
 
         // enduser로부터 입력받은 데이터 잘 들어왔는지 확인 log
         System.out.println("subject=" + subject);
@@ -38,10 +39,12 @@ public class BoardReplyInsertCmd implements BoardCmd {
         try {
             // board 테이블에 들어갈 id값을 가져오기 : board.id중에서 가장 높은 id값 + 1
             newId = dao.getBoardNewId();
+            /* depth와 orderNum을 정하는 로직 */
+            int minOrderNum = dao.getMinOrderNum(replyRootId, depth, orderNum);
+            System.out.println("minOrderNum==" + minOrderNum);
+
             // dao 기능 호출해서 enduser가 입력한 데이터와 replyRootId, depth, orderNum insert
-            depth = depth + 1;
-            orderNum = (dao.getMaxOrderNum(replyRootId, depth)) + 1;
-            dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
+//            dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
