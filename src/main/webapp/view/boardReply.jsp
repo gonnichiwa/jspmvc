@@ -35,7 +35,7 @@
         <tr>
             <!-- 취소 버튼을 누르면 boardList.bbs로 가도록 처리해 보시오. -->
             <td colspan="2">
-                <input type="hidden" name="refId" value="<%= request.getParameter("refId")%>"/>
+                <input type="hidden" name="replyRootId" value="<%= request.getParameter("replyRootId")%>"/>
                 <input type="hidden" name="depth" value="<%= request.getParameter("depth")%>"/>
                 <input type="hidden" name="orderNum" value="<%= request.getParameter("orderNum")%>"/>
                 <input type="submit" value="[글쓰기]"/>

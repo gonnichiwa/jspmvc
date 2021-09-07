@@ -100,7 +100,6 @@ public class BoardDAO {
         throw new SQLException("글 컨텐츠를 새로 입력하기 위한 아이디값 받아오기를 실패하였습니다.");
     }
 
-    // 원래 글을 작성. (NO 답글)
     public void insertBoardContent(int newId,
                                    String subject,
                                    String author,
@@ -146,7 +145,7 @@ public class BoardDAO {
             int readCount = rs.getInt("readCount");
             int commentCount = rs.getInt("commentCount");
             String password = rs.getString("password");
-            int refId = rs.getInt("refId");
+            int replyRootId = rs.getInt("replyRootId");
             int depth = rs.getInt("depth");
             int orderNum = rs.getInt("orderNum");
 
@@ -159,7 +158,7 @@ public class BoardDAO {
             data.setReadCount(readCount);
             data.setCommentCount(commentCount);
             data.setPassword(password);
-            data.setRefId(refId);
+            data.setReplyRootId(replyRootId);
             data.setDepth(depth);
             data.setOrderNum(orderNum);
 
@@ -300,5 +299,41 @@ public class BoardDAO {
         pstmt = conn.prepareStatement("update board set commentCount=commentCount+1 where id = ?");
         pstmt.setInt(1, boardId);
         pstmt.executeUpdate();
+    }
+
+    public void insertReplyContent(int newId,
+                                   String subject,
+                                   String author,
+                                   String content,
+                                   String password,
+                                   int replyRootId,
+                                   int depth,
+                                   int orderNum) throws ClassNotFoundException, SQLException {
+        // Connection, PreparedStatement, ResultSet은 interface 객체이다.
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement("insert into Board values (?, ?, ?, ?, CURDATE(), CURTIME(), 0, 0, ?, ?, ?, ?)");
+        pstmt.setInt(1, newId);
+        pstmt.setString(2, subject);
+        pstmt.setString(3, author);
+        pstmt.setString(4, content);
+        pstmt.setString(5, password);
+        pstmt.setInt(6, replyRootId);
+        pstmt.setInt(7, depth);
+        pstmt.setInt(8, orderNum);
+        pstmt.executeUpdate();
+
+    }
+
+    // replyRootId depth기준 maxOrderNum을 가져옴
+    public int getMaxOrderNum(int replyRootId, int depth) throws ClassNotFoundException, SQLException {
+        // Connection, PreparedStatement, ResultSet은 interface 객체이다.
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+        PreparedStatement pstmt = null;
+
+        return 0;
     }
 }

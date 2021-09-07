@@ -1,7 +1,6 @@
 package kr.ac.daegu.jspmvc.model;
 
 import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 // db에서 Board테이블의 컬럼과 row를 정의.
@@ -18,16 +17,16 @@ public class BoardDTO {
     private int commentCount;            // 댓글 갯수
     private String password;             // 수정 삭제를 위한 패스워드
     
-    private int refId;                   // 원래 글 번호 (답글일 경우) 
+    private int replyRootId;                   // 원래 글 번호 (답글일 경우)
     private int depth;                   // (답글일경우) 제목의 'RE: ' 갯수
     private int orderNum;                // (답글일경우) 글 목록보기 순서
 
-    public int getRefId() {
-        return refId;
+    public int getReplyRootId() {
+        return replyRootId;
     }
 
-    public void setRefId(int refId) {
-        this.refId = refId;
+    public void setReplyRootId(int replyRootId) {
+        this.replyRootId = replyRootId;
     }
 
     public int getDepth() {
