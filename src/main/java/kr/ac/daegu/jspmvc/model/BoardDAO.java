@@ -100,6 +100,7 @@ public class BoardDAO {
         throw new SQLException("글 컨텐츠를 새로 입력하기 위한 아이디값 받아오기를 실패하였습니다.");
     }
 
+    // 원래 글을 작성. (NO 답글)
     public void insertBoardContent(int newId,
                                    String subject,
                                    String author,
@@ -112,12 +113,13 @@ public class BoardDAO {
 
         // 쿼리 준비 & db 쿼리
         // insert into board values (1, 'testAuthor', 'testSubject', 'testContent', CURDATE(), CURTIME(), 0, 0)
-        pstmt = conn.prepareStatement("insert into Board values (?, ?, ?, ?, CURDATE(), CURTIME(), 0, 0, ?)");
+        pstmt = conn.prepareStatement("insert into Board values (?, ?, ?, ?, CURDATE(), CURTIME(), 0, 0, ?, ?, 0, 0)");
         pstmt.setInt(1, newId);
         pstmt.setString(2, subject);
         pstmt.setString(3, author);
         pstmt.setString(4, content);
         pstmt.setString(5, password);
+        pstmt.setInt(6, newId);
         pstmt.executeUpdate();
 
     }
