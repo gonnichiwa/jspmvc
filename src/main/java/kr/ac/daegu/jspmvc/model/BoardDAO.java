@@ -39,7 +39,7 @@ public class BoardDAO {
         // 쿼리 준비 & db 쿼리
         pstmt = conn.prepareStatement("select * from " +
                 "(select board.*, ROW_NUMBER() OVER() as rowNum from board order by replyRootId desc, ordernum asc) tb" +
-                " where tb.rowNum between "+startRowNum+" and "+endRowNum);
+                " where tb.replyRootId between "+startRowNum+" and "+endRowNum);
         rs = pstmt.executeQuery();
 
         // 글 목록을 반환할 ArrayList
