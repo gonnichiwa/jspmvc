@@ -49,6 +49,9 @@ public class BoardReplyInsertCmd implements BoardCmd {
                 subject = appendPrefixString("RE: ", depth, subject);
                 dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, orderNum);
             } else {
+                dao.updateOrderNum(replyRootId, minOrderNum);
+                depth = depth + 1;
+                subject = appendPrefixString("RE : ", depth, subject);
                 /*
                 -- 2-2. 1번(minOrderNum)이 0이 아닐 경우(1) : board테이블의 기존 orderNum들을 +1
                 UPDATE BOARD SET orderNum = orderNum + 1
@@ -57,6 +60,7 @@ public class BoardReplyInsertCmd implements BoardCmd {
                 INSERT INTO BOARD VALUES
                 (번호, (원글의 replyRootId), (1번값), (원글의 DEPTH +1) ,' 제목')
                 */
+                dao.insertReplyContent(newId, subject, author, content, password, replyRootId, depth, minOrderNum);
             }
 
 
