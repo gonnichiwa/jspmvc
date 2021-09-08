@@ -31,7 +31,7 @@ public class BoardDAO {
         int startRowNum;
         int endRowNum = pageNum*pagePerRow;
         if(pageNum == 1){
-            startRowNum = pageNum;
+            startRowNum = 0;
         } else {
             startRowNum = (pagePerRow*(pageNum-1))+1;
         }
