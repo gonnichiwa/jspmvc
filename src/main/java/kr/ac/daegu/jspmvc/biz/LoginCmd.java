@@ -18,9 +18,9 @@ public class LoginCmd implements BoardCmd {
 
         // DAO
         MemberDAO memDAO = new MemberDAO();
-        // id 기준으로 로그인 정보를 가져옴.
+//        // id 기준으로 로그인 정보를 가져옴.
         MemberDTO member = memDAO.getLoginData(id);
-        // 비밀번호 매칭
+//        // 비밀번호 매칭
         return isPasswordMatch(password, member.getPassword());
     }
 

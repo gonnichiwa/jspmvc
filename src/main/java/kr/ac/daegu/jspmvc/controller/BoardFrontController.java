@@ -36,7 +36,11 @@ public class BoardFrontController extends HttpServlet {
         if(cmdURI.equals("/login.bbs")){
             cmd = new LoginCmd();
             boolean loginSuccess = cmd.execute(request, response);
-            viewPage = "boardList.bbs";
+            if(loginSuccess){
+                viewPage = "boardList.bbs";
+            } else {
+                viewPage = "view/loginFailed.jsp";
+            }
         }
 
         // 글 목록 조회 처리(/jspmvc/boardList.bbs)
