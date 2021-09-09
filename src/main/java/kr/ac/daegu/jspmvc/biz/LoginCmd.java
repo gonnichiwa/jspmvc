@@ -1,7 +1,5 @@
 package kr.ac.daegu.jspmvc.biz;
 
-import kr.ac.daegu.jspmvc.model.BoardDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
