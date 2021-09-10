@@ -46,13 +46,6 @@ public class LoginCmd implements BoardCmd {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println("dbPassword = " + member.getPassword());
-        System.out.println("salt = " + member.getSalt());
-
-        System.out.println("inputPassword = " + inputPassword);
-        System.out.println("passwordSalt = " + passwordSalt);
-
-        System.out.println("encodedPassword = " + encodedPassword);
         return member.getPassword().equals(encodedPassword);
     }
 }
