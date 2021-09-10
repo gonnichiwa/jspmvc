@@ -7,6 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class LoginCmd implements BoardCmd {
@@ -28,10 +32,27 @@ public class LoginCmd implements BoardCmd {
             e.printStackTrace();
         }
         // 비밀번호 매칭
-        return isPasswordMatch(password, member.getPassword());
+        return isPasswordMatch(password, member);
     }
 
-    private boolean isPasswordMatch(String inputPassword, String dbPassword) {
-        return inputPassword.equals(dbPassword);
+    private boolean isPasswordMatch(String inputPassword, MemberDTO member) {
+        String passwordSalt = inputPassword + member.getSalt();
+        String encodedPassword = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.reset();
+            digest.update(passwordSalt.getBytes(StandardCharsets.UTF_8));
+            encodedPassword = String.format("%040x", new BigInteger(1, digest.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println("dbPassword = " + member.getPassword());
+        System.out.println("salt = " + member.getSalt());
+
+        System.out.println("inputPassword = " + inputPassword);
+        System.out.println("passwordSalt = " + passwordSalt);
+
+        System.out.println("encodedPassword = " + encodedPassword);
+        return member.getPassword().equals(encodedPassword);
     }
 }

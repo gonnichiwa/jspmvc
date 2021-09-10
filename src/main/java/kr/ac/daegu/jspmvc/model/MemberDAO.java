@@ -19,6 +19,7 @@ public class MemberDAO {
         if(rs.next()){
             memberDTO.setId(rs.getString("id"));
             memberDTO.setPassword(rs.getString("password"));
+            memberDTO.setSalt(rs.getString("salt"));
         }
 
         return memberDTO;

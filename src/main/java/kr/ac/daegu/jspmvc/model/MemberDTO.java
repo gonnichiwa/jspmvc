@@ -4,6 +4,15 @@ public class MemberDTO {
     private int mId;
     private String id;
     private String password;
+    private String salt;
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
     public int getmId() {
         return mId;
