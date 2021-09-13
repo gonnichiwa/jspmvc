@@ -25,13 +25,49 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public void postLoginData(String id,
-                              String password) {
+    public void postLoginData(int newId,
+                              String id,
+                              String encodedPassword,
+                              String salt) throws SQLException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
         PreparedStatement pstmt = null;
 
-        pstmt = conn.prepareStatement("insert into member values (?, ?)");
-        pstmt.setString(id);
-        pstmt.set
+        pstmt = conn.prepareStatement("insert into member values (?, ?, ?, ?)");
+        pstmt.setInt(1, newId);
+        pstmt.setString(2, id);
+        pstmt.setString(3, encodedPassword);
+        pstmt.setString(4, salt);
+        pstmt.executeUpdate();
+    }
+
+    public int existCount(String id) throws SQLException, ClassNotFoundException {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        pstmt = conn.prepareStatement("select count(*) from member where id = ?");
+        pstmt.setString(1, id);
+        rs = pstmt.executeQuery();
+
+        int count = 0;
+        if(rs.next()){
+            count = rs.getInt(1);
+        }
+        return count;
+    }
+
+    public int getNewId() throws SQLException, ClassNotFoundException {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        pstmt = conn.prepareStatement("select max(mId) as maxId from member");
+        rs = pstmt.executeQuery();
+
+        if(rs.next()){
+            int maxId = rs.getInt("maxId");
+            return maxId + 1;
+        }
+        return 0;
     }
 }
