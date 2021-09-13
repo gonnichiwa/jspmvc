@@ -11,7 +11,7 @@
     <title>회원가입 화면</title>
 </head>
 <body>
-<form action="signUp.bbs" method="post">
+<form action="signUp.bbs" method="post" name="reqSignUp">
     <table>
         <tr>
             <td><label for="id">아이디</label></td>
@@ -19,20 +19,28 @@
         </tr>
         <tr>
             <td><label for="password">비번</label></td>
-            <td><input type="text" name="password" id="password"/></td>
+            <td><input type="password" name="password" id="password"/></td>
         </tr>
         <tr>
             <td><label for="passwordCheck">비번확인</label></td>
-            <td><input type="text" name="passwordCheck" id="passwordCheck"/></td>
+            <td><input type="password" name="passwordCheck" id="passwordCheck"/></td>
         </tr>
+</form>
         <tr>
-            <!-- javascript로 비번확인 체크 로직까지 넣어서 회원가입 요청 처리 -->
-            <!-- 같으면 signUp.bbs 요청 날림 -->
-            <!-- 다르면 alert('비번을 정확히 입력 바랍니다') -->
-            <input type="submit" value="회원가입"/>
+            <button onclick="checkPassword()">회원가입</button>
         </tr>
     </table>
-</form>
+<script>
+    function checkPassword() {
+        const password = document.getElementById("password").value;
+        const checkPassword = document.getElementById("passwordCheck").value;
+        if(password === checkPassword) {
+            reqSignUp.submit();
+        } else {
+            alert('패스워드 틀립니다. 패스워드와 패스워드 확인란에 같은 패스워드를 넣어주세요');
+        }
+    }
+</script>
 
 </body>
 </html>
