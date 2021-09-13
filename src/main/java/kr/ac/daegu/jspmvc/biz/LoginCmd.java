@@ -1,5 +1,6 @@
 package kr.ac.daegu.jspmvc.biz;
 
+import kr.ac.daegu.jspmvc.common.PasswordEncoder;
 import kr.ac.daegu.jspmvc.model.MemberDAO;
 import kr.ac.daegu.jspmvc.model.MemberDTO;
 
@@ -7,10 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class LoginCmd implements BoardCmd {
@@ -36,16 +33,7 @@ public class LoginCmd implements BoardCmd {
     }
 
     private boolean isPasswordMatch(String inputPassword, MemberDTO member) {
-        String passwordSalt = inputPassword + member.getSalt();
-        String encodedPassword = null;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(passwordSalt.getBytes(StandardCharsets.UTF_8));
-            encodedPassword = String.format("%040x", new BigInteger(1, digest.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        String encodedPassword = PasswordEncoder.getEncodedPassword(inputPassword, member.getSalt());
         return member.getPassword().equals(encodedPassword);
     }
 }

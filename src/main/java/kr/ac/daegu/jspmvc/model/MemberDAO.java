@@ -24,4 +24,14 @@ public class MemberDAO {
 
         return memberDTO;
     }
+
+    public void postLoginData(String id,
+                              String password) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement("insert into member values (?, ?)");
+        pstmt.setString(id);
+        pstmt.set
+    }
 }
