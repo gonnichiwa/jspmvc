@@ -1,14 +1,7 @@
-create table Board(
-                      id int not null primary key,    			  -- 글 id
-                      author VARCHAR(200) not null,   			  -- 작성자 이름
-                      subject VARCHAR(300) not null,  			  -- 글 제목
-                      content VARCHAR(2000) not null, 			  -- 글 컨텐츠
-                      writeDate Date not null,        			  -- 작성 날짜
-                      writeTime Time not null,        			  -- 작성 시간
-                      readCount int not null,         			  -- 조회수
-                      commentCount int not null,      			  -- 댓글 갯수
-                      password VARCHAR(300) not null default '0000' -- 글 수정삭제 비밀번호
-)
+DROP TABLE IF EXISTS Comment
+DROP TABLE IF EXISTS Board
+DROP TABLE IF EXISTS Member
+
 
 -- 게시글
 CREATE TABLE Board (
@@ -20,7 +13,7 @@ CREATE TABLE Board (
                        writeTime    TIME          NOT NULL COMMENT '작성시각', -- 작성시각
                        readCount    INT           NOT NULL COMMENT '조회수', -- 조회수
                        commentCount INT           NOT NULL COMMENT '댓글수', -- 댓글수
-                       password     VARCHAR(300)  NOT NULL default '0000' COMMENT '수정삭제비밀번호' -- 수정삭제비밀번호
+                       password     VARCHAR(300)  NOT NULL default '0000' COMMENT '수정삭제비밀번호', -- 수정삭제비밀번호
                            replyRootId  INT           not null default 0,      -- 답글이 달리는 root원글
                        depth        int           not null default 0,      -- 답글 깊이
                        orderNum     int           not null default 0       -- root원글, 답글깊이에 따른 답글 순서
